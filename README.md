@@ -1,4 +1,9 @@
 # なにこれ？
-一覧-詳細画面のあるアプリ
-それぞれの画面はFragmentではなくActivityで作成する。
+一覧-詳細画面のあるAndroidアプリ  
+それぞれの画面はFragmentではなくActivityで作成する。  
 ViewModelとLiveDataを使用する。
+
+# ブランチ
+- master 適当に作った場合(ViewModelとLiveDataなし)
+- feature/mvvm MVVMにできたらいいな(WIP)
+- feature/mvpvm MVPVMにできたらいいな(WIP)
