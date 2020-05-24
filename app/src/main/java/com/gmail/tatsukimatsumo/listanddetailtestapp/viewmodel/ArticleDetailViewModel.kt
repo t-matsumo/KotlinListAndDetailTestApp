@@ -6,7 +6,7 @@ import com.gmail.tatsukimatsumo.listanddetailtestapp.model.Article
 import com.gmail.tatsukimatsumo.listanddetailtestapp.model.repository.article.ArticleLocalRepository
 
 /**
- * 記事一覧のViewModel
+ * 記事詳細のViewModel
  *
  * 画面に表示するデータを保持
  * データに変更があれば、紐付いているViewへも反映される

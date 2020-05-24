@@ -1,45 +1,50 @@
 package com.gmail.tatsukimatsumo.listanddetailtestapp.activity.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gmail.tatsukimatsumo.listanddetailtestapp.R
+import com.gmail.tatsukimatsumo.listanddetailtestapp.databinding.ArticleListItemViewBinding
 import com.gmail.tatsukimatsumo.listanddetailtestapp.model.Article
-import kotlinx.android.synthetic.main.article_list_item_view.view.*
+import com.gmail.tatsukimatsumo.listanddetailtestapp.viewmodel.ArticleListViewModel
 
 /**
- * @param articles 一覧表示する記事データの配列
- * @param articleListListener タップを処理するリスナ
+ * @param articleListViewModel 記事一覧画面のViewModel
  */
-class ArticleAdapter(private val articles: List<Article>, private var articleListListener: ArticleListListener) :
+class ArticleAdapter(private val articleListViewModel: ArticleListViewModel) :
     RecyclerView.Adapter<ArticleAdapter.ItemViewHolder>() {
 
-    class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class ItemViewHolder(val binding: ArticleListItemViewBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): ItemViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.article_list_item_view, parent, false)
-        return ItemViewHolder(itemView)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ArticleListItemViewBinding.inflate(layoutInflater, parent, false)
+        return ItemViewHolder(binding)
     }
 
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.view.articleTitle.text = articles[position].title
-        holder.view.articleTitle.setOnClickListener { articleListListener.onTapTitle(position) }
+        val article = articleListViewModel.articleList.value!![position]
+
+        // viewとViewData,modelを紐付ける
+        holder.binding.article = article
+        holder.binding.articleListViewModel = articleListViewModel
     }
 
-    override fun getItemCount() = articles.size
+    override fun getItemCount() = articleListViewModel.articleList.value?.size ?: 0
 
-    /**
-     * タップを処理するリスナのインターフェース
-     */
-    interface ArticleListListener {
-        /**
-         * 記事タイトルをタップしたときに呼び出す
-         * @param position 何番目の要素のタイトルがタップされたのか
-         */
-        fun onTapTitle(position: Int)
+    companion object {
+        @JvmStatic
+        @BindingAdapter("items")
+        // ViewModelとRecyclerViewをxmlで紐付けるためのBindingAdapter
+        fun RecyclerView.bindItems(items: List<Article>?) {
+            if (items == null) {
+                return
+            }
+
+            val adapter = adapter as ArticleAdapter
+            adapter.notifyDataSetChanged()
+        }
     }
 }
