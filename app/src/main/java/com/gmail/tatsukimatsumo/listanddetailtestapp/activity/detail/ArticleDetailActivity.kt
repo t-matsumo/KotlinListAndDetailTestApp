@@ -7,6 +7,7 @@ import com.gmail.tatsukimatsumo.listanddetailtestapp.R
 import com.gmail.tatsukimatsumo.listanddetailtestapp.databinding.ActivityArticleDetailBinding
 import com.gmail.tatsukimatsumo.listanddetailtestapp.viewmodel.ArticleDetailViewModel
 import androidx.activity.viewModels
+import com.gmail.tatsukimatsumo.listanddetailtestapp.presenter.ArticleDetailPresenter
 
 /**
  * 記事詳細の画面
@@ -28,8 +29,9 @@ class ArticleDetailActivity : AppCompatActivity() {
         val articleViewModel: ArticleDetailViewModel by viewModels()
         binding.articleViewModel = articleViewModel
 
-        // ViewModelの初期化に必要なデータを渡す
         val articleId = intent.getStringExtra(EXTRA_KEY_ARTICLE_ID)!!
-        articleViewModel.setArticleId(articleId)
+        // presenterを生成
+        val presenter = ArticleDetailPresenter(articleId, articleViewModel)
+        presenter.onCreate()
     }
 }
