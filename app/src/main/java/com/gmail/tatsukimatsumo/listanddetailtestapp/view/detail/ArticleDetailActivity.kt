@@ -1,4 +1,4 @@
-package com.gmail.tatsukimatsumo.listanddetailtestapp.activity.detail
+package com.gmail.tatsukimatsumo.listanddetailtestapp.view.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

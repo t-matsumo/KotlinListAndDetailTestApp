@@ -1,11 +1,11 @@
-package com.gmail.tatsukimatsumo.listanddetailtestapp.activity.list
+package com.gmail.tatsukimatsumo.listanddetailtestapp.view.list
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmail.tatsukimatsumo.listanddetailtestapp.R
-import com.gmail.tatsukimatsumo.listanddetailtestapp.activity.detail.ArticleDetailActivity
+import com.gmail.tatsukimatsumo.listanddetailtestapp.view.detail.ArticleDetailActivity
 import com.gmail.tatsukimatsumo.listanddetailtestapp.model.Article
 import com.gmail.tatsukimatsumo.listanddetailtestapp.model.repository.article.ArticleLocalRepository
 import kotlinx.android.synthetic.main.activity_main.*
