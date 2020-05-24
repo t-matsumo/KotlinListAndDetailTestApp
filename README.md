@@ -5,5 +5,5 @@ ViewModelとLiveDataを使用する。
 
 # ブランチ
 - master 適当に作った場合(ViewModelとLiveDataなし)
-- feature/mvvm MVVMにできたらいいな(WIP)
+- feature/mvvm MVVMにできたらいいな(based on master)
 - feature/mvpvm MVPVMにできたらいいな(WIP)
