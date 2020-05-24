@@ -1,15 +1,15 @@
-package com.gmail.tatsukimatsumo.listanddetailtestapp.activity.list
+package com.gmail.tatsukimatsumo.listanddetailtestapp.view.list
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmail.tatsukimatsumo.listanddetailtestapp.R
-import com.gmail.tatsukimatsumo.listanddetailtestapp.activity.detail.ArticleDetailActivity
+import com.gmail.tatsukimatsumo.listanddetailtestapp.view.detail.ArticleDetailActivity
 import com.gmail.tatsukimatsumo.listanddetailtestapp.databinding.ActivityMainBinding
+import com.gmail.tatsukimatsumo.listanddetailtestapp.presenter.ArticleListPresenter
 import com.gmail.tatsukimatsumo.listanddetailtestapp.viewmodel.ArticleListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * ViewとViewModelを紐付けるだけ
  * Modelへの参照は持たない
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ArticleListPresenter.ArticleListContract {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,11 +37,14 @@ class MainActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        articleListViewModel.onTapTitleEvent.observe(this, Observer { articleId ->
-            // 画面遷移はActivityでやる
-            val intent = Intent(this, ArticleDetailActivity::class.java)
-            intent.putExtra(ArticleDetailActivity.EXTRA_KEY_ARTICLE_ID, articleId)
-            startActivity(intent)
-        })
+        val presenter = ArticleListPresenter(articleListViewModel, this)
+        presenter.onCreate()
+    }
+
+    override fun startActivityToArticleDetail(articleId: String) {
+        // 画面遷移はActivityでやる
+        val intent = Intent(this, ArticleDetailActivity::class.java)
+        intent.putExtra(ArticleDetailActivity.EXTRA_KEY_ARTICLE_ID, articleId)
+        startActivity(intent)
     }
 }

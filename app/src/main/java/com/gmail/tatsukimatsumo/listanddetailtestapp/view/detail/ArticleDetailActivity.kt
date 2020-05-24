@@ -1,4 +1,4 @@
-package com.gmail.tatsukimatsumo.listanddetailtestapp.activity.detail
+package com.gmail.tatsukimatsumo.listanddetailtestapp.view.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +13,8 @@ import com.gmail.tatsukimatsumo.listanddetailtestapp.presenter.ArticleDetailPres
  * 記事詳細の画面
  *
  * ViewとViewModelを紐付けるだけ
- * ViewやModelへの参照は持たない
+ * Modelへの参照は持たない
+ * 基本的にPresenterに処理を委譲する
  */
 class ArticleDetailActivity : AppCompatActivity() {
     companion object {

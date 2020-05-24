@@ -1,4 +1,4 @@
-package com.gmail.tatsukimatsumo.listanddetailtestapp.activity.list
+package com.gmail.tatsukimatsumo.listanddetailtestapp.view.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
