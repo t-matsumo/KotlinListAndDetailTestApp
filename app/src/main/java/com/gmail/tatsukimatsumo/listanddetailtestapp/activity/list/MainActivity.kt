@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), ArticleAdapter.ArticleListListener {
      */
     override fun onTapTitle(position: Int) {
         val intent = Intent(this, ArticleDetailActivity::class.java)
-        intent.putExtra(Article::class.java.canonicalName, articles[position])
+        intent.putExtra(ArticleDetailActivity.EXTRA_KEY_ARTICLE_ID, articles[position].id)
         startActivity(intent)
     }
 }

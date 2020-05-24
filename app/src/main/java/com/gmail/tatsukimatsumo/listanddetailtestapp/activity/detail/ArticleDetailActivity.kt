@@ -8,13 +8,15 @@ import com.gmail.tatsukimatsumo.listanddetailtestapp.model.repository.article.Ar
 import kotlinx.android.synthetic.main.activity_article_detail.*
 
 class ArticleDetailActivity : AppCompatActivity() {
-
+    companion object {
+        const val EXTRA_KEY_ARTICLE_ID = "article_id"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_detail)
 
-        val article = intent.getParcelableExtra<Article>(Article::class.java.canonicalName)!!
-        ArticleLocalRepository().findBy(article.id, this::onSuccess)
+        val articleId = intent.getStringExtra(EXTRA_KEY_ARTICLE_ID)!!
+        ArticleLocalRepository().findBy(articleId, this::onSuccess)
     }
 
     private fun onSuccess(article: Article?) {
