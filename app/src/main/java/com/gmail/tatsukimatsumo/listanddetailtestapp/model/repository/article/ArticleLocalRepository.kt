@@ -1,5 +1,6 @@
 package com.gmail.tatsukimatsumo.listanddetailtestapp.model.repository.article
 
+import android.os.SystemClock.sleep
 import com.gmail.tatsukimatsumo.listanddetailtestapp.model.Article
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -14,6 +15,7 @@ class ArticleLocalRepository : ArticleRepository {
         /** データ取得は非同期で行う(下記の書き方は手抜き) */
         GlobalScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.Default) {
+                sleep(2000) // APIやDBの取得時間をシミュレート
                 articles.subList(from.coerceAtLeast(0), (from + count).coerceAtMost(articles.size))
             }.let {
                 callback(it)
@@ -23,6 +25,7 @@ class ArticleLocalRepository : ArticleRepository {
     override fun findBy(id: String, callback: (Article?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.Default) {
+                sleep(2000)// APIやDBの取得時間をシミュレート
                 articles.find { it.id == id }
             }.let {
                 callback(it)
